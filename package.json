@@ -1,0 +1,27 @@
+{
+  "name": "payu",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pratik24205/PayU-Integration.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pratik24205/PayU-Integration/issues"
+  },
+  "homepage": "https://github.com/pratik24205/PayU-Integration#readme",
+  "description": "",
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7"
+  }
+}
