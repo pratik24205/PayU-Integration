@@ -1,104 +1,95 @@
-# PayU Payment Integration with React
+# PayU Payment Integration
 
-This project demonstrates integrating the PayU payment gateway into a React application. The example is built using TypeScript and React functional components.
+This project demonstrates a simple payment integration using PayU's test payment gateway. The example form allows users to make a ₹10.00 payment by submitting the form. 
 
 ## Features
 
-- Collects payment details dynamically.
-- Configures and submits a payment form to PayU's test environment.
-- Provides success and failure callbacks.
+- Responsive design using HTML and CSS.
+- Pre-configured merchant and payment details for testing.
+- Secure handling of payment parameters with a hashed value.
 
-## Installation
+## Prerequisites
 
-### Prerequisites
-
-- Node.js installed on your system.
-- A PayU test account for merchant credentials.
-
-### Steps
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-
-## Configuration
-
-### PayU Merchant Details
-
-Update the `payuConfig` object in the `handlePayment` function within `App.tsx`:
-
-```typescript
-const payuConfig = {
-  key: "your_merchant_key", // Replace with your PayU merchant key
-  txnid: "txn123456", // Unique transaction ID
-  amount: "1.00", // Amount to be paid
-  firstname: "Jeevan", // Customer's first name
-  email: "jeevankn934@gmail.com", // Customer's email
-  phone: "8088951361", // Customer's phone
-  productinfo: "Sample Product", // Product info
-  surl: "http://localhost:3000/success", // Success URL
-  furl: "http://localhost:3000/failure", // Failure URL
-  hash: "precomputed_hash_here", // Precomputed hash
-};
-```
-
-#### How to Generate the Hash
-
-Use the PayU hash generation formula with your merchant key and salt. Refer to PayU's documentation for details.
-
-### Success and Failure URLs
-
-Update the URLs to point to your backend or desired endpoints:
-
-- `surl`: The endpoint that will handle successful payments.
-- `furl`: The endpoint that will handle failed payments.
-
-## Usage
-
-1. Run the application locally:
-   ```bash
-   npm start
-   ```
-2. Open the browser and navigate to `http://localhost:3000`.
-3. Click the **Pay Now** button to initiate the payment process.
-
-## Code Explanation
-
-### `handlePayment` Function
-
-- Dynamically creates a form with required fields for PayU.
-- Uses `POST` method to submit payment details to the PayU test environment.
-- Example test URL: `https://test.payu.in/_payment`.
-
-### Inline Styles
-
-Defined for a simple and clean UI:
-
-- Centered content with flexbox.
-- A styled button to trigger the payment process.
-
-## Notes
-
-- This implementation is for the PayU **test environment**. Use `https://secure.payu.in/_payment` for production.
-- Ensure that the hash is securely generated on your backend to avoid security vulnerabilities.
-- Do not expose sensitive information like the merchant key and salt in the frontend.
-
-## References
-
-- [PayU Integration Documentation](https://developer.payu.in/)
-- [React Documentation](https://reactjs.org/)
+1. **PayU Merchant Account**: You need a PayU test or live merchant account to perform transactions.
+2. **Merchant Key and Salt**: The `key` and `hash` parameters are specific to your PayU account. Update these values with your account details.
+3. **Transaction Hash**: The hash is a security feature that must be generated on the server-side using your merchant key, transaction details, and salt.
 
 ---
 
-Feel free to modify and expand this project based on your requirements!
+## How to Use
 
+### 1. Structure of the Project
+This project includes:
+- **HTML file**: Contains the payment form.
+- **CSS styling**: Inline styles to make the form visually appealing.
+
+### 2. Payment Form Fields
+The payment form includes:
+- **Merchant Details**:
+  - `key`: Merchant key provided by PayU.
+  - `txnid`: Unique transaction ID (should be dynamically generated for each transaction).
+  - `hash`: Security hash (must be generated on the backend).
+- **Customer Details**:
+  - `firstname`: Customer's first name.
+  - `email`: Customer's email address.
+  - `phone`: Customer's phone number.
+- **Payment Details**:
+  - `amount`: Payment amount.
+  - `productinfo`: Description of the product or service.
+- **Redirect URLs**:
+  - `surl`: Success URL where the user is redirected after a successful payment.
+  - `furl`: Failure URL where the user is redirected after a failed payment.
+
+### 3. Modify for Your Use
+Update the following parameters with your details:
+- **Merchant Key**: Replace the `key` field with your PayU merchant key.
+- **Transaction ID**: Generate a unique transaction ID for every payment.
+- **Hash**: Generate the hash on your server using PayU's algorithm. Replace the `hash` field with the generated hash.
+- **Redirect URLs**: Replace `surl` and `furl` fields with your actual success and failure URLs.
+
+### 4. Test the Integration
+- Use the **PayU test environment** (`https://test.payu.in/_payment`) for testing payments.
+- Switch to the **PayU live environment** (`https://secure.payu.in/_payment`) for production use.
+
+### 5. Hash Generation
+The hash is a SHA-512 encrypted string combining the following parameters in this order:
+
+hash = sha512(key|txnid|amount|productinfo|firstname|email|||||||||||salt)
+
+You must calculate this hash server-side using your merchant key and salt. Never expose your salt in the frontend.
+
+---
+
+## Example Hash Generation Code
+
+Here’s an example of generating the hash in Node.js:
+
+```javascript
+const crypto = require('crypto');
+
+function generateHash(key, txnid, amount, productinfo, firstname, email, salt) {
+  const data = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${salt}`;
+  return crypto.createHash('sha512').update(data).digest('hex');
+}
+
+const hash = generateHash(
+  'Dk3vGe', 
+  'txn123456', 
+  '10.00', 
+  'Internship', 
+  'Fundsroom', 
+  'fundsroom@example.com', 
+  'your_salt_here'
+);
+console.log('Hash:', hash);
+
+References:
+PayU Integration Documentation
+React Documentation
+
+Disclaimer
+This example uses static transaction details and a pre-generated hash for demonstration purposes only. For production use:
+
+Generate unique transaction IDs dynamically.
+Calculate the hash securely on the server.
+Use HTTPS for secure communication.
