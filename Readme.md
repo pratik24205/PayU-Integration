@@ -11,7 +11,7 @@ This project demonstrates a simple payment integration using PayU's test payment
 
 ## Folder Structure
 
-payU-integration/
+payU-integration/ 
 ├── node_modules/
 │   └── (dependencies managed by npm)
 ├── payu-integration/
@@ -78,57 +78,30 @@ Update the following parameters with your details:
 - Ensure the payment form submits to the PayU endpoint (`https://test.payu.in/_payment` or production URL).
 ## Getting Started
 
-Clone the repository:
-
-git clone https://github.com/pratik24205/PayU-Integration
-
-Navigate to the project directory:
+## Navigate to the project directory:
 
 cd payu-integration
 
-Install dependencies:
+## Install dependencies:
 
 npm install
 
-Run the development server:
+## Run the development server:
 
 npm run dev
 
-Open the application:
+## Open the application:
 
 Visit http://localhost:3000 in your web browser to view the application
 
 
-## Example Hash Generation Code
 
-Here’s an example of generating the hash in Node.js:
-
-```javascript
-const crypto = require('crypto');
-
-function generateHash(key, txnid, amount, productinfo, firstname, email, salt) {
-  const data = `${key}|${txnid}|${amount}|${productinfo}|${firstname}|${email}|||||||||||${salt}`;
-  return crypto.createHash('sha512').update(data).digest('hex');
-}
-
-const hash = generateHash(
-  'Dk3vGe', 
-  'txn123456', 
-  '10.00', 
-  'Internship', 
-  'Fundsroom', 
-  'fundsroom@example.com', 
-  'your_salt_here'
-);
-console.log('Hash:', hash);
-
-References:
+## references:
 PayU Integration Documentation
 React Documentation
 
-Disclaimer
+## Disclaimer
 This example uses static transaction details and a pre-generated hash for demonstration purposes only. For production use:
-
 Generate unique transaction IDs dynamically.
 Calculate the hash securely on the server.
 Use HTTPS for secure communication.
