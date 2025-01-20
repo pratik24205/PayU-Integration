@@ -12,16 +12,14 @@ This project demonstrates a simple payment integration using PayU's test payment
 ## Folder Structure
 
 payU-integration/ 
-├── node_modules/
-│   └── (dependencies managed by npm)
-├── payu-integration/
-│   ├── config/
-│   │   └── vite.config.js (Vite configuration file)
-│   ├── src/
-│   │   └── index.html (Main HTML file for the app)
-│   ├── package-lock.json (Generated file for dependency tree integrity)
-│   ├── package.json (Project metadata and dependencies)
-│   ├── README.md (Project documentation)
+├── node_modules/          # dependencies required by npm
+├── config/
+    └── vite.config.js     # Vite configuration file
+├── src/                   # source node
+    └── index.html         # Main HTML file for the app
+├── package-lock.json      # Generated file for dependency tree integrity
+├── package.json           # Project metadata and dependencies
+├── README.md              # Project documentation
 
 
 ## Technologies Used
@@ -78,9 +76,13 @@ Update the following parameters with your details:
 - Ensure the payment form submits to the PayU endpoint (`https://test.payu.in/_payment` or production URL).
 ## Getting Started
 
+## Clone the Repository 
+
+git clone "https://github.com/pratik24205/PayU-Integration"
+
 ## Navigate to the project directory:
 
-cd payu-integration
+cd Payu-Integration
 
 ## Install dependencies:
 
