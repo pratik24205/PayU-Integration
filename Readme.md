@@ -1,5 +1,5 @@
-# PayU Payment Integration
 ```text
+# PayU Payment Integration
 
 This project demonstrates a simple payment integration using PayU's test payment gateway. The example form allows users to make a ₹10.00 payment by submitting the form. 
 
@@ -12,8 +12,6 @@ This project demonstrates a simple payment integration using PayU's test payment
 
 ## Folder Structure
 
-## Folder Structure
-
 ```text
 payu-integration/
 ├── node_modules/        # Dependencies required by npm
@@ -21,9 +19,9 @@ payu-integration/
 ├── vite.config.js       # Vite configuration file
 ├── src/                 # Source code
 │   ├── index.html       # Main HTML file for the app
-│   ├── package-lock.json# Generated file for dependency tree integrity
-│   ├── package.json     # Project metadata and dependencies
-│   └── README.md        # Project documentation
+├── package-lock.json.   # Generated file for dependency tree integrity
+├── package.json         # Project metadata and dependencies
+├── README.md            # Project documentation
 
 ## Technologies Used
 
